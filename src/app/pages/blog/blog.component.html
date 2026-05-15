@@ -1,0 +1,182 @@
+<div class="blog-container">
+  <!-- Hero Section -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>SRLearnX Blog</h1>
+        <p>Insights, tips, and resources for your learning journey</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Post Detail Section (shows when a post is selected) -->
+  <section class="post-detail" *ngIf="selectedPost">
+    <div class="container">
+      <div class="post-container">
+        <div class="back-button">
+          <button (click)="clearSelection()">
+            <i class="fas fa-arrow-left"></i> Back to Blog
+          </button>
+        </div>
+
+        <article class="post">
+          <header class="post-header">
+            <h1>{{ selectedPost.title }}</h1>
+            <div class="post-meta">
+              <span class="post-author"><i class="fas fa-user"></i> {{ selectedPost.author }}</span>
+              <span class="post-date"><i class="fas fa-calendar-alt"></i> {{ selectedPost.date }}</span>
+              <span class="post-category"><i class="fas fa-folder"></i> {{ selectedPost.category }}</span>
+              <span class="post-read-time"><i class="fas fa-clock"></i> {{ selectedPost.readTime }}</span>
+            </div>
+          </header>
+
+          <div class="post-featured-image">
+            <img [src]="selectedPost.imageUrl" [alt]="selectedPost.title">
+          </div>
+
+          <div class="post-content" [innerHTML]="selectedPost.content"></div>
+
+          <div class="post-tags">
+            <span><i class="fas fa-tags"></i> Tags:</span>
+            <ul>
+              <li *ngFor="let tag of selectedPost.tags">{{ tag }}</li>
+            </ul>
+          </div>
+
+          <div class="post-share">
+            <span>Share this post:</span>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Share on Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Share on Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Share on LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Share via Email">
+                <i class="fas fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Related Posts -->
+        <div class="related-posts">
+          <h2>Related Posts</h2>
+          <div class="related-posts-grid">
+            <div class="related-post-card" *ngFor="let post of getRelatedPosts(selectedPost)">
+              <div class="related-post-image">
+                <img [src]="post.imageUrl" [alt]="post.title">
+              </div>
+              <div class="related-post-content">
+                <h3>{{ post.title }}</h3>
+                <p class="related-post-meta">
+                  <span><i class="fas fa-calendar-alt"></i> {{ post.date }}</span>
+                  <span><i class="fas fa-clock"></i> {{ post.readTime }}</span>
+                </p>
+                <button class="read-more-btn" (click)="selectPost(post)">Read More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Posts Listing Section (shows when no post is selected) -->
+  <section class="blog-posts-section" *ngIf="!selectedPost">
+    <div class="container">
+      <!-- Filters -->
+      <div class="filters">
+        <div class="search-box">
+          <input type="text" placeholder="Search blog posts..." [(ngModel)]="searchTerm">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="category-filter">
+          <span>Filter by category:</span>
+          <div class="category-buttons">
+            <button *ngFor="let category of categories" [class.active]="selectedCategory === category"
+              (click)="selectedCategory = category">
+              {{ category }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Post (first post) -->
+      <div class="featured-post" *ngIf="filteredPosts.length > 0">
+        <div class="featured-post-card" (click)="selectPost(filteredPosts[0])">
+          <div class="featured-post-image">
+            <img [src]="filteredPosts[0].imageUrl" [alt]="filteredPosts[0].title">
+          </div>
+          <div class="featured-post-content">
+            <span class="featured-label">Featured Post</span>
+            <h2>{{ filteredPosts[0].title }}</h2>
+            <p class="featured-post-excerpt">{{ filteredPosts[0].excerpt }}</p>
+            <div class="featured-post-meta">
+              <span><i class="fas fa-user"></i> {{ filteredPosts[0].author }}</span>
+              <span><i class="fas fa-calendar-alt"></i> {{ filteredPosts[0].date }}</span>
+              <span><i class="fas fa-clock"></i> {{ filteredPosts[0].readTime }}</span>
+            </div>
+            <button class="read-more-btn">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Regular Posts Grid -->
+      <div class="posts-grid" *ngIf="filteredPosts.length > 1">
+        <div class="post-card" *ngFor="let post of filteredPosts.slice(1)" (click)="selectPost(post)">
+          <div class="post-image">
+            <img [src]="post.imageUrl" [alt]="post.title">
+          </div>
+          <div class="post-content">
+            <span class="post-category">{{ post.category }}</span>
+            <h3>{{ post.title }}</h3>
+            <p class="post-excerpt">{{ post.excerpt }}</p>
+            <div class="post-meta">
+              <span><i class="fas fa-user"></i> {{ post.author }}</span>
+              <span><i class="fas fa-calendar-alt"></i> {{ post.date }}</span>
+              <span><i class="fas fa-clock"></i> {{ post.readTime }}</span>
+            </div>
+            <button class="read-more-btn">Read More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Posts Found -->
+      <div class="no-posts" *ngIf="filteredPosts.length === 0">
+        <i class="fas fa-search"></i>
+        <h3>No posts found</h3>
+        <p>Try adjusting your search or filter criteria</p>
+        <button class="reset-btn" (click)="searchTerm = ''; selectedCategory = 'All'">Reset Filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <div class="newsletter-text">
+          <h2>Subscribe to Our Newsletter</h2>
+          <p>Get the latest articles, tutorials, and updates delivered to your inbox</p>
+        </div>
+
+        <div class="newsletter-form">
+          <input type="email" placeholder="Enter your email">
+          <button type="submit">Subscribe</button>
+        </div>
+
+        <div class="newsletter-checkbox">
+          <label>
+            <input type="checkbox">
+            <span>I agree to receive educational content and updates</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

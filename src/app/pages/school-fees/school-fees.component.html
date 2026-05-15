@@ -1,0 +1,246 @@
+<div class="school-fees-container">
+  <div class="page-header">
+    <div class="container">
+      <h1>School Fee Payment</h1>
+      <p>Pay your school fees quickly and securely</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="school-fees-content">
+      <div class="school-fees-card">
+        <div class="card-header">
+          <div class="header-icon">
+            <i class="fas fa-school"></i>
+          </div>
+          <h2>Student Verification</h2>
+          <p>Please enter your details to proceed with the payment</p>
+          
+        </div>
+
+        <div class="card-body">
+           
+          <form [formGroup]="fetchForm" class="contact-form">
+            <div class="form-section" *ngIf="!showPaymentOptions">
+              <div class="form-group">
+                <label>Select School:</label>
+                <!-- <ng-select
+                  [items]="schools"
+                  bindLabel="billerName"
+                  [searchable]="true"
+                  [clearable]="true"
+                  formControlName="school"
+                  placeholder="Select a school"
+                  [fixedPlaceholder]="true"
+                > 
+                  <ng-template ng-option-tmp let-item="item">
+                    <img
+                      [src]="item.iconUrl"
+                      width="24"
+                      height="24"
+                      style="margin-right: 8px"
+                    />
+                    {{ item.billerName }}
+                  </ng-template>
+                  <ng-template ng-label-tmp let-item="item">
+                    <img
+                      [src]="item.iconUrl"
+                      width="20"
+                      height="20"
+                      style="margin-right: 4px"
+                    />
+                    {{ item.billerName }}
+                  </ng-template>
+                </ng-select> -->
+                <!-- @if (bank?.invalid && (bank?.dirty || bank?.touched)) {
+              <div class="text-danger">Bank is required.</div>
+              } -->
+                <mat-label>School : </mat-label>
+                <mat-select id="school" name="school" formControlName="school">
+                  <mat-option>None</mat-option>
+                  @for (state of schools; track state) {
+                  <mat-option [value]="state">{{
+                    state.billerName +
+                      ", " +
+                      state.coverageCity +
+                      ", " +
+                      state.coveragePincode
+                  }}</mat-option>
+                  }
+                </mat-select>
+              </div>
+              <div class="form-group">
+                <label for="studentUniqueID">Student Unique ID*</label>
+                <input
+                  type="text"
+                  id="studentUniqueID"
+                  name="studentUniqueID"
+                  placeholder="Enter student Unique ID"
+                  formControlName="studentUniqueID"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="schoolName">Mobile Number of Parent</label>
+                <input
+                  type="text"
+                  id="parentMobile"
+                  name="parentMobile"
+                  formControlName="parentMobile"
+                  placeholder="Enter Mobile Number of Parent"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="dateOfBirth">DOB of Student(DDMMYYYY)</label>
+                <input
+                  type="date"
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  formControlName="dateOfBirth"
+                  required
+                />
+              </div>
+              <!-- [disabled]="!studentUniqueID || !parentMobile || !dateOfBirth" -->
+              <!-- <button
+                class="btn btn-primary verify-btn"
+                (click)="verifyStudent()" 
+              >
+                <i class="fas fa-search"></i> Fetch Bill <mat-spinner [diameter]="40" color="primary" ></mat-spinner>
+              </button> -->
+              <button
+                class="btn btn-primary verify-btn"
+                (click)="verifyStudent()"
+                [disabled]="!fetchForm.valid || isLoading"
+              >
+                <ng-container *ngIf="!isLoading">
+                  <i class="fas fa-search"></i> Fetch Bill
+                </ng-container>
+                <mat-spinner *ngIf="isLoading" [diameter]="24" color="primary">
+                </mat-spinner>
+              </button> 
+            </div>
+
+
+            <div class="payment-section" *ngIf="showPaymentOptions">
+              <div class="student-details">
+                <h3>Student Details</h3>
+                <div class="detail-row">
+                  <span class="detail-label">School Name:</span>
+                  <span class="detail-value">{{
+                    school?.value?.billerName +
+                      ", " +
+                      school?.value?.coverageCity +
+                      ", " +
+                      school?.value?.coveragePincode
+                  }}</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Student Unique ID:</span>
+                  <span class="detail-value">{{ studentUniqueID?.value }}</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Mobile Number of Parent:</span>
+                  <span class="detail-value">{{ parentMobile?.value }}</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">DOB of Student(DDMMYYYY):</span>
+                  <span class="detail-value">{{ dateOfBirth?.value }}</span>
+                </div>
+              </div>
+
+              <div class="fee-details">
+                <h3>Fee Details</h3>
+                <div class="fee-amount">
+                  <span class="amount-label">Amount Due:</span>
+                  <span class="amount-value">₹{{ paymenAmount }}</span>
+                </div>
+                <p class="fee-note">
+                  This includes tuition fees, examination fees, and other
+                  applicable charges.
+                </p>
+              </div>
+
+              <div class="payment-methods">
+                <h3>Payment Methods</h3>
+                <div class="payment-options">
+                  <!-- <div class="payment-option">
+                    <input type="radio" id="upi" name="paymentMethod" checked />
+                    <label for="upi">UPI</label>
+                  </div> -->
+                  <div class="payment-option">
+                    <input type="radio" id="card" name="paymentMethod" />
+                    <label for="card">Credit/Debit Card</label>
+                  </div>
+                  <!-- <div class="payment-option">
+                    <input type="radio" id="netbanking" name="paymentMethod" />
+                    <label for="netbanking">Net Banking</label>
+                  </div> -->
+                </div>
+              </div>
+
+              <button
+                class="btn btn-primary pay-btn verify-btn"
+                (click)="autoPePaymentProcess(paymenAmount)"
+                [disabled]="isPaymentLoading"
+              >
+                <ng-container *ngIf="!isPaymentLoading">
+                  <i class="fas fa-search"></i> Pay Now ₹{{ paymenAmount }}
+                </ng-container>
+                <mat-spinner
+                  *ngIf="isPaymentLoading"
+                  [diameter]="24"
+                  color="primary"
+                >
+                </mat-spinner>
+              </button>
+
+              <div class="back-option">
+                <button
+                  class="btn btn-outline back-btn"
+                  (click)="showPaymentOptions = false"
+                >
+                  <i class="fas fa-arrow-left"></i> Back to Student Details
+                </button>
+              </div>
+            </div>
+          </form>
+         
+        </div>
+      </div>
+
+      <div class="payment-info">
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Secure Payments</h3>
+          <p>
+            All transactions are encrypted and secure. We do not store your
+            payment details.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-receipt"></i>
+          </div>
+          <h3>Instant Receipt</h3>
+          <p>
+            Get an instant digital receipt via email after successful payment.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3>24/7 Support</h3>
+          <p>Need help? Our support team is available 24/7 to assist you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text" appAnimate animation="fadeInRight" [delay]="100">
+        <h1>Unlock Your Potential with SRLearnX</h1>
+        <p>Discover high-quality courses taught by industry experts and take your skills to the next level.</p>
+        <div class="hero-buttons">
+          <a routerLink="/courses" class="btn btn-primary">Browse Courses</a>
+          <a routerLink="/about" class="btn btn-secondary">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-image" appAnimate animation="fadeInLeft" [delay]="300">
+        <div class="floating-graphics">
+          <div class="graphic graphic-1"><i class="fas fa-graduation-cap"></i></div>
+          <div class="graphic graphic-2"><i class="fas fa-laptop-code"></i></div>
+          <div class="graphic graphic-3"><i class="fas fa-certificate"></i></div>
+          <div class="graphic graphic-4"><i class="fas fa-book"></i></div>
+          <div class="graphic graphic-5"><i class="fas fa-chart-line"></i></div>
+          <div class="graphic graphic-6"><i class="fas fa-brain"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- School Fees Payment Section -->
+  <!-- <section class="school-fees-section">
+    <div class="container">
+      <div class="school-fees-content" appAnimate animation="fadeInUp">
+        <div class="school-fees-icon">
+          <i class="fas fa-school"></i>
+        </div>
+        <h2>School Fee Payments</h2>
+        <p>Pay your school fees quickly and securely through our online portal</p>
+        <a routerLink="/school-fees" class="btn btn-primary school-fees-btn">
+          <i class="fas fa-credit-card"></i> Pay School Fees
+        </a>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item" appAnimate animation="fadeInUp" [delay]="100">
+        <div class="stat-number"><span class="counter">15</span>+</div>
+        <div class="stat-label">Professional Courses</div>
+      </div>
+      <div class="stat-item" appAnimate animation="fadeInUp" [delay]="200">
+        <div class="stat-number"><span class="counter">50</span>+</div>
+        <div class="stat-label">Expert Instructors</div>
+      </div>
+      <div class="stat-item" appAnimate animation="fadeInUp" [delay]="300">
+        <div class="stat-number"><span class="counter">10000</span>+</div>
+        <div class="stat-label">Happy Students</div>
+      </div>
+      <div class="stat-item" appAnimate animation="fadeInUp" [delay]="400">
+        <div class="stat-number"><span class="counter">95</span>%</div>
+        <div class="stat-label">Success Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Courses Section -->
+  <section class="featured-courses">
+    <div class="section-header" appAnimate animation="fadeInUp">
+      <h2>Featured Courses</h2>
+      <p>Start learning with our most popular courses</p>
+    </div>
+    <div class="courses-grid">
+      <div class="course-card" *ngFor="let course of featuredCourses; let i = index" appAnimate animation="fadeInUp"
+        [delay]="100 * (i % 3)">
+        <div class="course-image">
+          <img src="{{ course.imageUrl }}" alt="{{ course.title }}">
+          <div class="course-badge">Featured</div>
+        </div>
+        <div class="course-content">
+          <div class="course-info">
+            <span class="course-level">{{ course.level }}</span>
+            <span class="course-duration">{{ course.duration }}</span>
+          </div>
+          <h3>{{ course.title }}</h3>
+          <p>{{ course.description }}</p>
+          <div class="course-footer">
+            <div class="course-price">₹{{ course.price }}</div>
+            <button class="btn btn-primary" (click)="addToCart(course)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view-all" appAnimate animation="fadeInUp">
+      <a routerLink="/courses" class="btn btn-outline">View All Courses</a>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="why-choose-us">
+    <div class="section-header" appAnimate animation="fadeInUp">
+      <h2>Why Choose SRLearnX?</h2>
+      <p>We're committed to providing the best learning experience</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature" appAnimate animation="zoomIn" [delay]="100">
+        <div class="feature-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>Expert Instructors</h3>
+        <p>Learn from industry professionals with years of experience.</p>
+      </div>
+      <div class="feature" appAnimate animation="zoomIn" [delay]="200">
+        <div class="feature-icon">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <h3>Hands-on Projects</h3>
+        <p>Apply your knowledge with real-world projects and assignments.</p>
+      </div>
+      <div class="feature" appAnimate animation="zoomIn" [delay]="300">
+        <div class="feature-icon">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <h3>Certificates</h3>
+        <p>Earn certificates to showcase your skills to employers.</p>
+      </div>
+      <div class="feature" appAnimate animation="zoomIn" [delay]="400">
+        <div class="feature-icon">
+          <i class="fas fa-clock"></i>
+        </div>
+        <h3>Learn at Your Pace</h3>
+        <p>Access course materials anytime, anywhere, at your convenience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learning Path Section -->
+  <section class="learning-path">
+    <div class="section-header" appAnimate animation="fadeInUp">
+      <h2>Your Learning Journey</h2>
+      <p>Follow a structured path to success</p>
+    </div>
+    <div class="path-steps">
+      <div class="path-step" appAnimate animation="fadeInRight" [delay]="100">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Choose Your Course</h3>
+          <p>Browse our catalog and find the perfect course that matches your goals and interests.</p>
+        </div>
+      </div>
+      <div class="path-step" appAnimate animation="fadeInRight" [delay]="200">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Learn at Your Pace</h3>
+          <p>Access course materials anytime, anywhere, and learn at a pace that suits your schedule.</p>
+        </div>
+      </div>
+      <div class="path-step" appAnimate animation="fadeInRight" [delay]="300">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Practice with Projects</h3>
+          <p>Apply your knowledge through hands-on projects and assignments designed for real-world scenarios.</p>
+        </div>
+      </div>
+      <div class="path-step" appAnimate animation="fadeInRight" [delay]="400">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Get Certified</h3>
+          <p>Earn a certificate upon completion to showcase your new skills to employers and advance your career.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <div class="cta-content" appAnimate animation="zoomIn">
+      <h2>Ready to Start Learning?</h2>
+      <p>Join thousands of students already learning on SRLearnX</p>
+      <a routerLink="/courses" class="btn btn-primary pulse-btn">Get Started</a>
+    </div>
+  </section>
+</div>

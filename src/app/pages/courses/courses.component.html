@@ -1,0 +1,82 @@
+<div class="courses-container">
+  <!-- Hero Section -->
+  <section class="courses-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Explore Our Courses</h1>
+        <p>Discover a wide range of courses to enhance your skills and advance your career</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+  <section class="courses-section">
+    <div class="container">
+      <!-- Filters -->
+      <div class="filters">
+        <div class="search-box">
+          <input 
+            type="text" 
+            placeholder="Search courses..." 
+            #searchInput
+            (keyup)="search(searchInput.value)"
+          >
+          <button><i class="fas fa-search"></i></button>
+        </div>
+        
+        <div class="level-filter">
+          <span>Filter by level:</span>
+          <div class="level-buttons">
+            <button 
+              *ngFor="let level of levels" 
+              [class.active]="selectedLevel === level"
+              (click)="filterByLevel(level)"
+            >
+              {{ level === 'all' ? 'All Levels' : level }}
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Courses Grid -->
+      <div class="courses-grid" *ngIf="filteredCourses.length > 0">
+        <div class="course-card" *ngFor="let course of filteredCourses">
+          <div class="course-image">
+            <img [src]="course.imageUrl" [alt]="course.title">
+          </div>
+          <div class="course-content">
+            <div class="course-info">
+              <span class="course-level">{{ course.level }}</span>
+              <span class="course-duration">{{ course.duration }}</span>
+            </div>
+            <h3>{{ course.title }}</h3>
+            <p>{{ course.description }}</p>
+            <div class="instructor">
+              <i class="fas fa-user"></i> {{ course.instructor }}
+            </div>
+            <div class="rating">
+              <span class="stars">
+                <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]" 
+                   [class.filled]="star <= course.rating"
+                   [class.half]="star - 0.5 === course.rating"></i>
+              </span>
+              <span class="rating-value">{{ course.rating }}</span>
+            </div>
+            <div class="course-footer">
+              <div class="course-price">₹{{ course.price }}</div>
+              <button   class="btn btn-primary" (click)="addToCart(course)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- No Results -->
+      <div class="no-results" *ngIf="filteredCourses.length === 0">
+        <i class="fas fa-search"></i>
+        <h3>No courses found</h3>
+        <p>Try adjusting your search or filter criteria</p>
+        <button class="btn btn-primary" (click)="filterByLevel('all'); searchInput.value = ''; search('')">Reset Filters</button>
+      </div>
+    </div>
+  </section>
+</div>

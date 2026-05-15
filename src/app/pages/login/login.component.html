@@ -1,0 +1,46 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Login to SRLearnX</h2>
+      <p>Enter your email or mobile number to receive an OTP</p>
+    </div>
+
+    <div class="login-form">
+      <div class="form-group">
+        <label for="contactInfo">Email / Mobile Number</label>
+        <input type="text" id="contactInfo" name="contactInfo" [(ngModel)]="contactInfo"
+          placeholder="Enter your email or mobile number" required>
+      </div>
+
+      <button class="btn btn-primary request-otp-btn" (click)="requestOTP()" [disabled]="!contactInfo">
+        Request OTP
+      </button>
+
+      <div class="form-group" *ngIf="otpSent">
+        <label for="otp">OTP</label>
+        <input type="text" id="otp" name="otp" [(ngModel)]="otp" placeholder="Enter OTP sent to your email/mobile"
+          maxlength="6" required>
+        <div class="otp-info">
+          <span>Didn't receive OTP?</span>
+          <button class="resend-btn" (click)="requestOTP()">Resend OTP</button>
+        </div>
+      </div>
+
+      <div class="terms-checkbox" *ngIf="otpSent">
+        <input type="checkbox" id="terms" name="terms" [(ngModel)]="acceptTerms">
+        <label for="terms">
+          I agree to the <a routerLink="/terms-conditions">Terms and Conditions</a> and <a
+            routerLink="/privacy-policy">Privacy Policy</a>
+        </label>
+      </div>
+
+      <button class="btn btn-primary login-btn" (click)="login()" *ngIf="otpSent" [disabled]="!otp || !acceptTerms">
+        Login
+      </button>
+
+      <div class="signup-link">
+        <p>Don't have an account? <a routerLink="/signup">Sign up</a></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,208 @@
+<div class="career-container">
+  <!-- Hero Section -->
+  <section class="career-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Join Our Team</h1>
+        <p>Discover exciting career opportunities at SRLearnX and be part of our mission to transform education</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Job Application Section (shows when a job is selected) -->
+  <section class="job-application" *ngIf="selectedJob">
+    <div class="container">
+      <div class="application-container">
+        <div class="back-button">
+          <button (click)="clearSelection()">
+            <i class="fas fa-arrow-left"></i> Back to Jobs
+          </button>
+        </div>
+
+        <div class="job-header">
+          <h2>{{ selectedJob.title }}</h2>
+          <div class="job-meta">
+            <span><i class="fas fa-building"></i> {{ selectedJob.department }}</span>
+            <span><i class="fas fa-map-marker-alt"></i> {{ selectedJob.location }}</span>
+            <span><i class="fas fa-briefcase"></i> {{ selectedJob.type }}</span>
+            <span><i class="fas fa-calendar-alt"></i> Posted: {{ selectedJob.postedDate }}</span>
+          </div>
+        </div>
+
+        <div class="job-details">
+          <div class="job-description">
+            <h3>Job Description</h3>
+            <p>{{ selectedJob.description }}</p>
+
+            <h3>Requirements</h3>
+            <ul>
+              <li *ngFor="let requirement of selectedJob.requirements">{{ requirement }}</li>
+            </ul>
+          </div>
+
+          <div class="application-form" *ngIf="!isSubmitted">
+            <h3>Apply for this position</h3>
+            <form (ngSubmit)="submitApplication()">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" [(ngModel)]="applyForm.name" required
+                  placeholder="Your full name">
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" [(ngModel)]="applyForm.email" required
+                  placeholder="Your email address">
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" [(ngModel)]="applyForm.phone" required
+                  placeholder="Your phone number">
+              </div>
+
+              <div class="form-group">
+                <label for="resume">Resume/CV</label>
+                <input type="file" id="resume" name="resume" [(ngModel)]="applyForm.resume" required>
+                <small>Upload your resume (PDF, DOC, DOCX)</small>
+              </div>
+
+              <div class="form-group">
+                <label for="coverLetter">Cover Letter</label>
+                <textarea id="coverLetter" name="coverLetter" [(ngModel)]="applyForm.coverLetter" rows="5"
+                  placeholder="Tell us why you're interested in this position and what makes you a great fit"></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+          </div>
+
+          <div class="success-message" *ngIf="isSubmitted">
+            <i class="fas fa-check-circle"></i>
+            <h3>Application Submitted!</h3>
+            <p>Thank you for your interest in joining our team. We will review your application and get back to you
+              soon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jobs Listing Section (shows when no job is selected) -->
+  <section class="jobs-section" *ngIf="!selectedJob">
+    <div class="container">
+      <div class="jobs-header">
+        <h2>Current Openings</h2>
+        <p>Explore our current job openings and find the perfect role for your skills and experience</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <div class="search-box">
+          <input type="text" placeholder="Search jobs..." [(ngModel)]="searchTerm">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="filter-options">
+          <div class="filter-group">
+            <label>Department:</label>
+            <select [(ngModel)]="filterDepartment">
+              <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Location:</label>
+            <select [(ngModel)]="filterLocation">
+              <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jobs List -->
+      <div class="jobs-list" *ngIf="filteredJobs.length > 0">
+        <div class="job-card" *ngFor="let job of filteredJobs">
+          <div class="job-info">
+            <h3>{{ job.title }}</h3>
+            <div class="job-meta">
+              <span><i class="fas fa-building"></i> {{ job.department }}</span>
+              <span><i class="fas fa-map-marker-alt"></i> {{ job.location }}</span>
+              <span><i class="fas fa-briefcase"></i> {{ job.type }}</span>
+            </div>
+            <p class="job-description">{{ job.description }}</p>
+            <p class="job-date">Posted: {{ job.postedDate }}</p>
+          </div>
+          <div class="job-action">
+            <button class="view-btn" (click)="selectJob(job)">View Details</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Jobs Found -->
+      <div class="no-jobs" *ngIf="filteredJobs.length === 0">
+        <i class="fas fa-search"></i>
+        <h3>No jobs found</h3>
+        <p>Try adjusting your search or filter criteria</p>
+        <button class="reset-btn" (click)="searchTerm = ''; filterDepartment = 'All'; filterLocation = 'All'">Reset
+          Filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Join Us Section -->
+  <section class="why-join-us">
+    <div class="container">
+      <h2>Why Join SRLearnX?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3>Growth Opportunities</h3>
+          <p>Continuous learning and career advancement opportunities to help you reach your full potential.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Collaborative Culture</h3>
+          <p>Work with talented professionals in a supportive and inclusive environment.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>Innovation</h3>
+          <p>Be part of a team that's transforming education through technology and innovation.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-balance-scale"></i>
+          </div>
+          <h3>Work-Life Balance</h3>
+          <p>Flexible work arrangements and policies that support your well-being.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-medal"></i>
+          </div>
+          <h3>Competitive Benefits</h3>
+          <p>Comprehensive benefits package including health insurance, retirement plans, and more.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3>Make an Impact</h3>
+          <p>Contribute to our mission of making quality education accessible to everyone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

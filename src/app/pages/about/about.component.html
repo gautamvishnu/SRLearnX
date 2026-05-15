@@ -1,0 +1,183 @@
+<div class="about-container">
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>About Us</h1>
+        <p>Discover our story, mission, and the team behind SRLearnX</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item" *ngFor="let stat of stats">
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-image">
+          <img src="assets/images/about-image.svg" alt="About SRLearnX">
+        </div>
+        <div class="about-text">
+          <h2>The Best Online Learning Platform for Your Success</h2>
+          <h3>Building Worlds of Knowledge for Students with SRLearnX Learning</h3>
+          <p>At SRLearnX, we believe that education is the most powerful tool for transformation. Founded with a vision
+            to make quality education accessible to everyone, we have grown into a trusted platform that empowers
+            learners worldwide.</p>
+          <p>Our comprehensive course catalog, expert instructors, and interactive learning environment are designed to
+            help you achieve your personal and professional goals. Whether you're looking to advance your career,
+            explore a new field, or simply expand your knowledge, SRLearnX is your trusted partner in the pursuit of
+            knowledge and personal growth.</p>
+
+          <div class="about-features">
+            <div class="feature">
+              <i class="fas fa-book"></i>
+              <span>Course Catalog</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-laptop-code"></i>
+              <span>Interactive Learning</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-certificate"></i>
+              <span>Certification</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-users"></i>
+              <span>Community Support</span>
+            </div>
+          </div>
+
+          <a routerLink="/courses" class="btn btn-primary">Explore Courses</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Categories Section -->
+  <section class="categories-section">
+    <div class="container">
+      <h2>Our Course Categories</h2>
+      <div class="categories-slider">
+        <div class="category">HTML & CSS Courses</div>
+        <div class="category">React Courses</div>
+        <div class="category">PHP Laravel Courses</div>
+        <div class="category">VueJs Courses</div>
+        <div class="category">Java Courses</div>
+        <div class="category">NodeJS Courses</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing-section">
+    <div class="container">
+      <h2>Select the Ideal Plan for Your Learning Journey</h2>
+
+      <div class="plan-toggle">
+        <button [ngClass]="{'active': isPlanTypeSelected('monthly')}"
+          (click)="togglePlanType('monthly')">Monthly</button>
+        <button [ngClass]="{'active': isPlanTypeSelected('yearly')}" (click)="togglePlanType('yearly')">Yearly (Save
+          30%)</button>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card" *ngFor="let plan of plans" [ngClass]="{'recommended': plan.recommended}">
+          <div class="pricing-header">
+            <h3>{{ plan.name }}</h3>
+            <div class="price">
+              <span class="amount">{{ plan.price }}</span>
+              <span class="period">{{ plan.period }}</span>
+            </div>
+          </div>
+
+          <div class="pricing-features">
+            <ul>
+              <li *ngFor="let feature of plan.features">
+                <i class="fas fa-check"></i> {{ feature }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="pricing-footer">
+            <a href="#" class="btn" [ngClass]="{'btn-primary': plan.recommended, 'btn-outline': !plan.recommended}">
+              Choose Plan
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <h2>Meet Our Team</h2>
+      <p class="section-subtitle">The passionate people behind SRLearnX</p>
+
+      <div class="team-grid">
+        <div class="team-card" *ngFor="let member of teamMembers">
+          <div class="team-image">
+            <img [src]="member.imageUrl" [alt]="member.name">
+          </div>
+          <div class="team-info">
+            <h3>{{ member.name }}</h3>
+            <p class="position">{{ member.position }}</p>
+            <p class="bio">{{ member.bio }}</p>
+            <div class="social-links">
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="container">
+      <h2>What Our Customers Are Saying</h2>
+      <p class="section-subtitle">12+ million people are already learning on SRLearnX</p>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+          <div class="testimonial-content">
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p>{{ testimonial.content }}</p>
+          </div>
+          <div class="testimonial-author">
+            <img [src]="testimonial.imageUrl" [alt]="testimonial.name">
+            <div class="author-info">
+              <h4>{{ testimonial.name }}</h4>
+              <p>{{ testimonial.position }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Let's Work Together</h2>
+        <p>Welcome to our diverse and dynamic course catalog. At SRLearnX, we're dedicated to providing you with access
+          to high-quality education that empowers your personal and professional growth.</p>
+        <a routerLink="/contact" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</div>

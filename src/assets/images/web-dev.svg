@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="300" height="180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="180" fill="#3f51b5"/>
+  <g>
+    <text x="150" y="70" font-family="Arial" font-size="24" text-anchor="middle" fill="white">Web Development</text>
+    <text x="150" y="100" font-family="Arial" font-size="16" text-anchor="middle" fill="white">HTML • CSS • JavaScript</text>
+    
+    <!-- HTML5 Logo (simplified) -->
+    <g transform="translate(80, 120) scale(0.4)">
+      <path d="M0,0 L50,0 L45.5,45 L25,50 L4.5,45 Z" fill="#e34f26"/>
+      <path d="M25,5 L25,45 L40,41 L45,5 Z" fill="#ef652a"/>
+      <text x="25" y="30" font-family="Arial" font-size="30" text-anchor="middle" fill="white">H</text>
+    </g>
+    
+    <!-- CSS3 Logo (simplified) -->
+    <g transform="translate(150, 120) scale(0.4)">
+      <path d="M0,0 L50,0 L45.5,45 L25,50 L4.5,45 Z" fill="#1572b6"/>
+      <path d="M25,5 L25,45 L40,41 L45,5 Z" fill="#33a9dc"/>
+      <text x="25" y="30" font-family="Arial" font-size="30" text-anchor="middle" fill="white">C</text>
+    </g>
+    
+    <!-- JS Logo (simplified) -->
+    <g transform="translate(220, 120) scale(0.4)">
+      <rect x="0" y="0" width="50" height="50" fill="#f7df1e"/>
+      <text x="25" y="30" font-family="Arial" font-size="30" text-anchor="middle" fill="black">JS</text>
+    </g>
+  </g>
+</svg>

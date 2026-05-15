@@ -1,0 +1,60 @@
+<div class="cart-container">
+  <div class="container">
+    <div class="cart-header">
+      <h1>Your Shopping Cart</h1>
+      <p *ngIf="cartItems.length === 0">Your cart is empty. <a routerLink="/">Continue shopping</a></p>
+    </div>
+    
+    <div class="cart-content" *ngIf="cartItems.length > 0">
+      <div class="cart-items">
+        <div class="cart-item" *ngFor="let item of cartItems">
+          <div class="item-image">
+            <img [src]="item.imageUrl" [alt]="item.title">
+          </div>
+          <div class="item-details">
+            <h3>{{ item.title }}</h3>
+            <p class="item-instructor">Instructor: {{ item.instructor }}</p>
+            <div class="item-meta">
+              <span class="item-duration">{{ item.duration }}</span>
+              <span class="item-level">{{ item.level }}</span>
+            </div>
+          </div>
+          <div class="item-price">
+            <p>₹{{ item.price }}</p>
+          </div>
+          <div class="item-actions">
+            <button class="btn-remove" (click)="removeFromCart(item.id)">
+              <i class="fas fa-trash"></i> Remove
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cart-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>₹{{ getCartTotal() }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Discount:</span>
+          <span>₹0</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total:</span>
+          <span>₹{{ getCartTotal() }}</span>
+        </div>
+        <button class="btn btn-primary checkout-btn" (click)="paymentWithRazorPay()" >Proceed to Checkout</button>
+        <button class="btn btn-outline clear-btn" (click)="clearCart()">Clear Cart</button>
+      </div>
+    </div>
+    
+    <div class="recommended-courses" *ngIf="cartItems.length > 0">
+      <h2>You might also like</h2>
+      <p>Explore more courses to enhance your learning journey</p>
+      <div class="course-recommendations">
+        <a routerLink="/courses" class="btn btn-outline">Browse More Courses</a>
+      </div>
+    </div>
+  </div>
+</div>
