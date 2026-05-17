@@ -14,6 +14,8 @@
 *.userprefs
 wwwroot/client-app/
 
+dist/
+
 # Mono auto generated files
 mono_crash.*
 

@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  baseUrl: "https://api.viabledigiseva.com/v3/", // "https://uatpayment.viabledigiseva.com/api/v3/";
-  // baseUrl: 'https://uatpayment.viabledigiseva.com/api/v3/'
-  edubaseUrl: "https://api.srlearnx.co.in",
+  baseUrl: "https://srimoney.com/services-api/",
+  // baseUrl: "https://uatpayment.viabledigiseva.com/api/v3/",
+  edubaseUrl: "https://srimoney.com/services-api/",
   PgAgency: {
     EasebuzzEdu: 37,
   },

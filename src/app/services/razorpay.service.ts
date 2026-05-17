@@ -42,7 +42,7 @@ export class RazorpayService {
     }
 
     const options = {
-      key: "rzp_live_POjCeKpBf38Rwp",
+      key: "rzp_live_SZjnZf3GZ5Xeml",
       amount: amount * 100,
       currency: "INR",
       name: "SRLearnX",
@@ -52,9 +52,9 @@ export class RazorpayService {
         // Call your backend to verify
       },
       prefill: {
-        name: "Akhil Jha",
+        name: "Vishnu Jha",
         email: "srlearnxjha1647@gmail.com",
-        contact: "9911001209",
+        contact: "9654584747",
       },
       theme: { color: "#3399cc" },
     };
@@ -63,16 +63,8 @@ export class RazorpayService {
     razorpay.open();
   }
 
-  createOrder(amount: number, userId: number): Observable<any> {
-    let payload = {
-      amount: amount,
-      userId: userId,
-    };
-    const url = `${this.baseUrl}Razorpay/CreateOrder`;
-    return this.http.post<any>(url, payload);
-  }
   initiateRazorpayGateway(payload: any): Observable<any> {
-    const url = `${this.baseUrl}Razorpay/PGTransaction`;
+    const url = `${this.baseUrl}PaymentGatewayOpen/SmRPayEducation`;
     return this.http.post<any>(url, payload);
   }
 }

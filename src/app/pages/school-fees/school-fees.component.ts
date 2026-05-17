@@ -208,9 +208,9 @@ export class SchoolFeesComponent implements OnInit {
 
     const payload = {
       amount: paymenAmount,
-      firstName: "Akhil",
-      mobile: "9911001209",
-      email: "akhiljha1647@gmail.com",
+      firstName: "Vishnu",
+      mobile: "9654584747",
+      email: "techy.vishnu007@gmail.com",
       txnId: "",
       sUrl: "http://localhost/Success.aspx",
     };
@@ -282,7 +282,7 @@ export class SchoolFeesComponent implements OnInit {
         initChannel: "AGT",
         deviceInfo: {
           terminalId: "12813923",
-          mobile: "9911001209",
+          mobile: "9654584747",
           postalCode: "110044",
           geoCode: "28.6326,77.2175",
         },
@@ -327,9 +327,9 @@ export class SchoolFeesComponent implements OnInit {
         this.fetchForm.value;
       const payload: AutoPayRequest = {
         amount: paymenAmount,
-        name: "Akhil Jha",
+        name: "Vishnu Jha",
         mobile: parentMobile,
-        email: "akhiljha1647@gmail.com",
+        email: "techy.vishnu007@gmail.com",
         redirectUri: "https://srlearnx.co.in/school-fees",
       };
       this.autoPayService.initiateAutoPayPayment(payload).subscribe({
@@ -359,7 +359,7 @@ export class SchoolFeesComponent implements OnInit {
       pincode: 854105,
       student: {
         studentUniqueID: "739184620157",
-        parentMobile: "9911001209",
+        parentMobile: "9654584747",
         dateOfBirth: "2017-01-12",
       },
     },

@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  baseUrl: "https://api.viabledigiseva.com/v3/",
-  edubaseUrl: "https://api.srlearnx.co.in",
+  baseUrl: "https://localhost:7101/",
+  edubaseUrl: "https://localhost:7101/",
   PgAgency: {
     EasebuzzEdu: 37,
   },

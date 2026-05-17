@@ -69,7 +69,7 @@ export class CoursesComponent {
       partnerId: 51,
       amount: course.price,
       charge: 10,
-      firstName: "Akhil",
+      firstName: "Vishnu",
       mobile: "9990662544",
       email: "amaren1982@gmail.com",
       txnId: "",

@@ -16,7 +16,7 @@ export class CartComponent {
   cartItems: Course[] = [];
 
   constructor(public cartService: CartService,
-      public razorpayService: RazorpayService
+    public razorpayService: RazorpayService
   ) {
     this.cartItems = this.cartService.getCartItems();
   }
@@ -35,31 +35,45 @@ export class CartComponent {
     return this.cartService.getCartTotal();
   }
 
-  paymentWithRazorPay() { 
+  paymentWithRazorPay() {
+    // const payload = {
+    //   partnerId: 51,
+    //   amount: this.getCartTotal(),
+    //   charge: 10,
+    //   firstName: "Vishnu",
+    //   mobile: "9990662544",
+    //   email: "amaren1982@gmail.com",
+    //   txnId: "",
+    //   sUrl: "",
+    //   ramarks: "this is cart",
+    // };
+
     const payload = {
-      partnerId: 51,
       amount: this.getCartTotal(),
-      charge: 10,
-      firstName: "Akhil",
-      mobile: "9990662544",
-      email: "amaren1982@gmail.com",
-      txnId: "",
-      sUrl: "",
-      ramarks: "this is cart",
-    };
+      "fullName": "Vishnu",
+      "mobile": "9654584647",
+      "emailId": "gautam.vishnu007@gmail.com",
+      "clientRefId": "SrLeanX-123456",
+      "callbackUrl": "https://srlearnx.com/payment-callback",
+      "accessMode": "WEB"
+    }
+
     this.razorpayService.initiateRazorpayGateway(payload).subscribe({
       next: (response: any) => {
         console.log(
           " initiateRazorpayGateway : ",
           response,
           response?.data?.orderId
-        ); 
-        this.razorpayService.pay(response?.data?.orderId, 10);
+        );
+        if (response.status)
+          this.razorpayService.pay(response?.data?.orderId, 10);
+        else
+          alert("Failed to initiate payment gateway. Please try again.");
       },
       error: (err) => {
-        
+
         console.error("Error fetching bill details", err);
-         
+
       },
     });
   }
