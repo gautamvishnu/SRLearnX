@@ -9,7 +9,6 @@ declare var Razorpay: any;
   providedIn: "root",
 })
 export class RazorpayService {
-  // private readonly baseUrl = 'https://api.viabledigiseva.com/v3/'; // "https://uatpayment.viabledigiseva.com/api/v3/";
   private readonly baseUrl = environment.baseUrl;
 
   loadRazorpayScript(): Promise<boolean> {
@@ -52,8 +51,8 @@ export class RazorpayService {
         // Call your backend to verify
       },
       prefill: {
-        name: "Vishnu Jha",
-        email: "srlearnxjha1647@gmail.com",
+        name: "Vishnu Gautam",
+        email: "techy.vishnu007@gmail.com",
         contact: "9654584747",
       },
       theme: { color: "#3399cc" },

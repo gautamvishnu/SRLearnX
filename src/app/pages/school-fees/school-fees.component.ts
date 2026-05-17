@@ -327,7 +327,7 @@ export class SchoolFeesComponent implements OnInit {
         this.fetchForm.value;
       const payload: AutoPayRequest = {
         amount: paymenAmount,
-        name: "Vishnu Jha",
+        name: "Vishnu Gautam",
         mobile: parentMobile,
         email: "techy.vishnu007@gmail.com",
         redirectUri: "https://srlearnx.co.in/school-fees",
